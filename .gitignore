@@ -23,3 +23,11 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+
+### Node modules ###
+node/
+node_modules/
+
+### Build targets and static files ###
+target/
+public/
