@@ -246,14 +246,12 @@ fieldset {
   input,
   textarea {
     display: block;
-    background: none;
     padding: $mf-spacer $mf-spacer ($mf-spacer / 2);
     font-size: $mf-font-size;
     border-width: 0;
     border-color: transparent;
     line-height: 1.9;
     width: 100%;
-    color: transparent;
     transition: all $mf-transition-speed ease;
     box-shadow: none;
   }

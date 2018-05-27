@@ -5,7 +5,8 @@
 
     <vuestic-widget class="no-padding no-v-padding">
       <vuestic-tabs
-        :names="[$t('dashboard.dataVisualization'), $t('dashboard.usersAndMembers'), $t('dashboard.setupProfile'), $t('dashboard.features')]"
+        :names="[$t('dashboard.dataVisualization'), $t('dashboard.usersAndMembers'), 
+                 $t('dashboard.setupProfile'), $t('dashboard.features')]"
         ref="tabs">
         <div :slot="$t('dashboard.dataVisualization')">
           <data-visualisation-tab></data-visualisation-tab>
@@ -34,9 +35,15 @@
   import FeaturesTab from './features-tab/FeaturesTab.vue'
   import DataVisualisationTab from './data-visualisation-tab/DataVisualisation.vue'
   import DashboardBottomWidgets from './DashboardBottomWidgets.vue'
+  import axios from 'axios'
+
+  export const AXIOS = axios.create({
+    baseURL: process.env.API_BASE_URL
+  })
 
   export default {
     name: 'dashboard',
+
     components: {
       DataVisualisationTab,
       DashboardInfoWidgets,
@@ -59,6 +66,15 @@
           }
         })
       }
+    },
+    created () {
+      var mailObj = {
+        to: 'hanky0301@gmail.com',
+        subject: '[Test]',
+        text: '<!DOCTYPE html><html><body><h1>This is a Heading</h1><p>This is a paragraph.</p></body></html>'
+      }
+      console.log(mailObj)
+      AXIOS.post(`/mail/send`, mailObj)
     }
   }
 

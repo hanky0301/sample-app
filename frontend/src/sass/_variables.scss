@@ -59,7 +59,7 @@ $body-bg: $light-gray;
 $top-nav-bg: $darkest-gray;
 $body-color: $vue-darkest-blue !default;
 $layout-padding: 24px;
-$layout-padding-right: 44px;
+$layout-padding-right: 25px;
 
 $top-nav-height: 72px;
 $nav-padding-left: $layout-padding;
@@ -71,7 +71,7 @@ $sidebar-width: 225px;
 $sidebar-top: calc(#{$top-nav-height} + #{$layout-padding});
 $sidebar-left: $layout-padding;
 
-$content-wrap-ml: calc(#{$sidebar-left} + #{$sidebar-width} + 35px);
+$content-wrap-ml: calc(#{$sidebar-left} + #{$sidebar-width} + 25px);
 $content-wrap-pr: $layout-padding-right;
 $content-wrap-pt: $layout-padding;
 $content-wrap-pb: $layout-padding;
@@ -188,7 +188,7 @@ $widget-header-border: 2px solid $light-gray;
 $widget-header-height: 55px;
 $widget-body-no-header-height: 100%;
 $widget-body-with-header-height: calc(100% - #{$widget-header-height});
-$widget-mb: 1.875rem;
+$widget-mb: 25px;
 $info-widget-border: 0.5rem solid $brand-primary;
 
 // Links
