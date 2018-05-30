@@ -4,7 +4,6 @@ import javax.validation.Valid;
 
 import com.example.practice.model.EmailObject;
 import com.example.practice.service.EmailService;
-import com.example.practice.service.EmailServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,14 +17,14 @@ public class EmailController {
     private final EmailService emailService;
 
 	@Autowired
-	EmailController(EmailServiceImpl emailService) {
+	EmailController(EmailService emailService) {
 		this.emailService = emailService;
 	}
 
 	@PostMapping("/mail/send")
-    public void createMail(@RequestBody @Valid EmailObject emailObject) {
+    public int createMail(@RequestBody @Valid EmailObject emailObject) {
 		System.out.println(emailObject.toString());
-        emailService.sendHtmlMessage(
+        return emailService.sendHtmlMessage(
 			emailObject.getTo(), 
 			emailObject.getSubject(), 
 			emailObject.getText()
