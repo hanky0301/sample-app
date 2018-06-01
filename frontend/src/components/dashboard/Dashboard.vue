@@ -66,15 +66,6 @@
           }
         })
       }
-    },
-    created () {
-      var mailObj = {
-        to: 'hanky0301@gmail.com',
-        subject: '[Test]',
-        text: '<!DOCTYPE html><html><body><h1>This is a Heading</h1><p>This is a paragraph.</p></body></html>'
-      }
-      console.log(mailObj)
-      AXIOS.post(`/mail/send`, mailObj)
     }
   }
 

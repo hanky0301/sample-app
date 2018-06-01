@@ -58,6 +58,19 @@
               Read full article on <a href="https://medium.com/@dorn.anna/girl-no-you-dont-2e21e826c62c">Medium</a>
             </p>
           </vuestic-medium-editor>
+          <div class="row">
+            <div class="col-md-2 offset-md-5">
+              <button class="btn btn-primary btn-sm" @click="sendArticle" v-if="!sending">
+                Send
+              </button>
+              <fingerprint-spinner
+                :animation-duration="1500"
+                :size="128"
+                :color="palette.primary"
+                v-if="sending">
+              </fingerprint-spinner>
+            </div>
+          </div>
         </vuestic-widget>
       </div>
     </div>
@@ -65,8 +78,20 @@
 </template>
 
 <script>
+  import { FingerprintSpinner } from 'epic-spinners'
+  import {mapGetters} from 'vuex'
+  import axios from 'axios'
+
+  export const AXIOS = axios.create({
+    baseURL: process.env.API_BASE_URL
+  })
+
   export default {
     name: 'medium-editor',
+
+    components: {
+      FingerprintSpinner
+    },
 
     data () {
       return {
@@ -85,8 +110,13 @@
               'h3'
             ]
           }
-        }
+        },
+        sending: false
       }
+    },
+
+    computed: {
+      ...mapGetters(['palette'])
     },
 
     methods: {
@@ -100,6 +130,26 @@
       highlightSampleText () {
         let sampleText = document.getElementsByClassName('default-selection')[0]
         this.editor.selectElement(sampleText)
+      },
+
+      sendArticle () {
+        var mailObj = {
+          to: 'hanky0301@gmail.com',
+          subject: '[Test]',
+          text: this.editor.getContent()
+        }
+        this.sending = true
+        AXIOS.post(`/mail/send`, mailObj).then(
+          response => {
+            if (response.data === 0) {
+              console.log('Sent')
+              this.sending = false
+            } else {
+              console.log('Not sent')
+            }
+            this.$router.push({ name: 'Dashboard' })
+          }
+        )
       }
     }
   }
