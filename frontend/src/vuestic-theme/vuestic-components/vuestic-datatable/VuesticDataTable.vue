@@ -10,11 +10,6 @@
         <div class="form-group">
           <slot name="additionalTableControl"></slot>
         </div>
-        <items-per-page :options="itemsPerPage"
-                        :label="itemsPerPageLabel"
-                        :defaultPerPage="defaultPerPageComputed"
-                        @items-per-page="onItemsPerPage"
-                        v-show="perPageSelectorShown"></items-per-page>
       </div>
     </div>
     <vuetable
