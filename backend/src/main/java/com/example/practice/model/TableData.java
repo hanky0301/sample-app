@@ -8,11 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class TableData {
 	private int total;
-	private int per_page;
+	private int per_page = 6;
 	private int current_page;
 	private int last_page;
 	private String next_page_url;
@@ -21,9 +19,11 @@ public class TableData {
 	private int to;
 	private List<Job> data;
 
+	public TableData() {
+		data = new ArrayList<Job>();
+	}
+
 	public void addData(Job job) {
-		if (data == null)
-			data = new ArrayList<Job>();
 		data.add(job);
 		total++;
 	}

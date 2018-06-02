@@ -179,9 +179,17 @@
 
     <div class="row">
       <div class="col-md-12">
-        <vuestic-widget :headerText="$t('tables.advanced')" v-if="!job">
+        <vuestic-widget :headerText="job.title" v-if="job">
+          <div v-html="job.description"></div>
+          <div class="col-md-2 offset-md-5">
+            <button class="btn btn-primary btn-sm" @click="closeDetail">
+              Close
+            </button>
+          </div>
+        </vuestic-widget>
+        <vuestic-widget :headerText="$t('tables.advanced')">
           <vuestic-data-table
-            @clicked="viewJob"
+            @clicked="openDetail"
             :apiUrl="apiUrl"
             :tableFields="tableFields"
             :itemsPerPage="itemsPerPage"
@@ -191,14 +199,6 @@
             :paginationPath="paginationPath"
             :queryParams="queryParams"
           />
-        </vuestic-widget>
-        <vuestic-widget :headerText="job.title" v-if="job">
-          <div v-html="job.description"></div>
-          <div class="col-md-2 offset-md-5">
-            <button class="btn btn-primary btn-sm" @click="backToJobs">
-              Back
-            </button>
-          </div>
         </vuestic-widget>
       </div>
     </div>
@@ -233,10 +233,10 @@
     },
 
     methods: {
-      viewJob (data) {
+      openDetail (data) {
         this.job = data
       },
-      backToJobs () {
+      closeDetail () {
         this.job = ''
       }
     }
