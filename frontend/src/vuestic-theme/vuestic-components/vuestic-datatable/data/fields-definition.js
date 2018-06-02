@@ -1,25 +1,25 @@
 export default {
   tableFields: [
     {
+      name: '__slot:view-button',
+      title: ''
+    },
+    {
       name: '__component:badge-column',
       title: '',
       dataClass: 'text-center'
     },
     {
-      name: 'name',
-      sortField: 'name'
+      name: 'title',
+      title: 'Title'
     },
     {
-      name: 'email',
-      sortField: 'email'
+      name: 'company',
+      title: 'Department'
     },
     {
-      name: 'address.line2',
-      title: 'city'
-    },
-    {
-      name: 'salary',
-      title: 'score'
+      name: 'location',
+      title: 'Location'
     }
   ],
   sortFunctions: {
