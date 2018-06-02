@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row">
+    <!--div class="row">
       <div class="col-xs-12 col-md-12">
         <vuestic-widget :headerText="$t('tables.basic')">
           <div class="table-responsive">
@@ -76,9 +76,9 @@
           </div>
         </vuestic-widget>
       </div>
-    </div>
+    </div-->
 
-    <div class="row">
+    <!--div class="row">
       <div class="col-md-12">
         <vuestic-widget :headerText="$t('tables.styled')">
           <div class="table-responsive">
@@ -175,12 +175,13 @@
           </div>
         </vuestic-widget>
       </div>
-    </div>
+    </div-->
 
     <div class="row">
       <div class="col-md-12">
-        <vuestic-widget :headerText="$t('tables.advanced')">
+        <vuestic-widget :headerText="$t('tables.advanced')" v-if="!job">
           <vuestic-data-table
+            @clicked="viewJob"
             :apiUrl="apiUrl"
             :tableFields="tableFields"
             :itemsPerPage="itemsPerPage"
@@ -191,10 +192,18 @@
             :queryParams="queryParams"
           />
         </vuestic-widget>
+        <vuestic-widget :headerText="job.title" v-if="job">
+          <div v-html="job.description"></div>
+          <div class="col-md-2 offset-md-5">
+            <button class="btn btn-primary btn-sm" @click="backToJobs">
+              Back
+            </button>
+          </div>
+        </vuestic-widget>
       </div>
     </div>
 
-  </div>
+    </div>
 </template>
 
 <script>
@@ -211,14 +220,24 @@
 
     data () {
       return {
-        apiUrl: 'https://vuetable.ratiw.net/api/users',
+        apiUrl: '/api/jobs',
         apiMode: true,
         tableFields: FieldsDef.tableFields,
         itemsPerPage: ItemsPerPageDef.itemsPerPage,
         sortFunctions: FieldsDef.sortFunctions,
         paginationPath: '',
         defaultTablePerPage: 6,
-        queryParams: QueryParams
+        queryParams: QueryParams,
+        job: ''
+      }
+    },
+
+    methods: {
+      viewJob (data) {
+        this.job = data
+      },
+      backToJobs () {
+        this.job = ''
       }
     }
   }

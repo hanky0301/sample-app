@@ -31,8 +31,13 @@
       :appendParams="moreParams"
       :perPage="perPage"
       :queryParams="queryParams"
-      @vuetable:pagination-data="onPaginationData"
-    />
+      @vuetable:pagination-data="onPaginationData">
+      <template slot="view-button" slot-scope="props">
+        <button class="btn btn-primary btn-micro" @click="viewJob(props.rowData)">
+          View
+        </button>
+      </template>
+    </vuetable>
     <div class="d-flex justify-content-center mb-4">
       <vuetable-pagination ref="pagination"
                            :css="css.pagination"
@@ -213,6 +218,9 @@
     },
 
     methods: {
+      viewJob (data) {
+        this.$emit('clicked', data)
+      },
       onFilterSet (filterText) {
         this.filterText = filterText
         Vue.nextTick(() => this.$refs.vuetable.refresh())
